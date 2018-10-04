@@ -2,9 +2,9 @@ explorePageUI <- function(id) {
   ns <- NS(id)
 
   navbarMenu(
-    ns(id),
-    expressionTabUI(ns("Expression")),
-    panelTabUI(ns("Panel plot"))
+    "Explore",
+    expressionTabUI(ns("expression")),
+    panelTabUI(ns("panelPlot"))
   )
 }
 
@@ -12,7 +12,7 @@ expressionTabUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    ns(id),
+    "Expression",
     fluidRow(
       div(
         p(strong('\tInformation:')),
@@ -97,7 +97,7 @@ panelTabUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    'Panel plot',
+    "Panel plot",
     tags$ul(
       tags$li(
         strong('Panel plot'),

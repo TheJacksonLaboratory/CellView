@@ -2,9 +2,9 @@ subclusterPageUI <- function(id) {
   ns <- NS(id)
 
   navbarMenu(
-    ns(id),
+    "Subcluster analysis",
 
-    dgeAnalysisTabUI(ns("DGE Analysis"))
+    dgeAnalysisTabUI(ns("dgeAnalysis"))
   )
 }
 
@@ -12,7 +12,7 @@ dgeAnalysisTabUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    ns(id),
+    "DGE analysis",
     tags$ul(
       tags$li(
         strong('Subclustering'),

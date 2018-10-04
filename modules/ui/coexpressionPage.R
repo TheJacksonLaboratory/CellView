@@ -2,10 +2,10 @@ coexpressionPageUI <- function(id) {
   ns <- NS(id)
 
   navbarMenu(
-    ns(id),
-    allClustersPanelUI(ns("AllClusters")),
-    selectionCellsPanelUI(ns("Selected cells")),
-    binarizePanelU(ns("Binarize"))
+    "Co-expression",
+    allClustersPanelUI(ns("allClusters")),
+    selectionCellsPanelUI(ns("selectedCells")),
+    binarizePanelUI(ns("binarize"))
   )
 }
 
@@ -13,7 +13,7 @@ allClustersPanelUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    ns(id),
+    "All clusters",
 
     fluidRow(
       column(
@@ -44,7 +44,7 @@ selectionCellsPanelUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    ns(id),
+    "Selected cells",
     tags$ul(
       tags$li(
         strong('Subclustering'),
@@ -108,7 +108,7 @@ binarizePanelUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    ns(id),
+    "Binarize",
     tags$ul(
       tags$li(
         strong('Binary Expression'),

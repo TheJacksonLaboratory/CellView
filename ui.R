@@ -1,4 +1,3 @@
-
 shinyUI(
   navbarPage(
     theme = shinytheme("flatly"),
@@ -7,10 +6,10 @@ shinyUI(
       target = '_blank'),
     windowTitle = 'Single Cell Biology',
 
-    mainPageUI("Overview"),
-    explorePageUI("Explore"),
-    coexpressionPageUI("Co-expression"),
-    subclusterPageUI("Subcluster-analysis")
+    mainPageUI("overview"),
+    explorePageUI("explore"),
+    coexpressionPageUI("coexpression"),
+    subclusterPageUI("subclusterAnalysis")
   )
 )
 

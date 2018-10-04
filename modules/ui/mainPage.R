@@ -2,7 +2,7 @@ mainPageUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    ns(id),
+    "Overview",
     fluidRow(
       div(
         h3("CellView"),
