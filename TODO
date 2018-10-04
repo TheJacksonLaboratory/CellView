@@ -1,6 +1,6 @@
 UI reorganization
 -[x] Move pages into modules
--[ ] Update pages to use their namespaces
+-[x] Update pages to use their namespaces
 -[x] Fix buttons
 -[ ] Create reusable elements for common design patterns
     -[x] cluster selection

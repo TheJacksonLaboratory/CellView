@@ -2,10 +2,10 @@ coexpressionPageUI <- function(id) {
   ns <- NS(id)
 
   navbarMenu(
-    id,
-    allClustersPanelUI("AllClusters"),
-    selectionCellsPanelUI("Selected cells"),
-    binarizePanelUI("Binarize")
+    ns(id),
+    allClustersPanelUI(ns("AllClusters")),
+    selectionCellsPanelUI(ns("Selected cells")),
+    binarizePanelU(ns("Binarize"))
   )
 }
 
@@ -13,16 +13,20 @@ allClustersPanelUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    id,
+    ns(id),
 
     fluidRow(
       column(
         2,
         tagAppendAttributes(
-          textInput('heatmap_geneids', 'Comma seperated gene names', value = 'Il6,Cd3d,Genes,Umi'),
-          `data-proxy-click` = "goButton1"
+          textInput(
+            ns('heatmap_geneids'),
+            'Comma seperated gene names',
+            value = 'Il6,Cd3d,Genes,Umi'
+          ),
+          `data-proxy-click` = ns("goButton1")
         ),
-        actionEnterButton('goButton1', 'Run')
+        actionEnterButton(ns('goButton1'), 'Run')
       )
     ),
 
@@ -30,7 +34,7 @@ allClustersPanelUI <- function(id) {
       column(
         10,
         offset = 1,
-        plotOutput('heatmap')
+        plotOutput(ns('heatmap'))
       )
     )
   )
@@ -40,7 +44,7 @@ selectionCellsPanelUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    id,
+    ns(id),
     tags$ul(
       tags$li(
         strong('Subclustering'),
@@ -52,19 +56,19 @@ selectionCellsPanelUI <- function(id) {
       column(
         2,
         tagAppendAttributes(
-          textInput('gene_id_sch', 'Enter gene', value = 'Il6'),
-          `data-proxy-click` = "goButton5"
+          textInput(ns('gene_id_sch'), 'Enter gene', value = 'Il6'),
+          `data-proxy-click` = ns("goButton5")
         ),
-        actionEnterButton('goButton5', 'Run')
+        actionEnterButton(ns('goButton5'), 'Run')
       ),
 
       column(
         2,
-        uiOutput("clusters2")
+        uiOutput(ns("clusters2"))
       ),
 
-      dimensionSelection('dimension_x2', 'X', default='V1'),
-      dimensionSelection('dimension_y2', 'Y', default='V2')
+      dimensionSelection(ns('dimension_x2'), 'X', default='V1'),
+      dimensionSelection(ns('dimension_y2'), 'Y', default='V2')
     ),
 
     fluidRow(
@@ -72,8 +76,8 @@ selectionCellsPanelUI <- function(id) {
         5,
         offset = 1,
         plotOutput(
-          'clusterPlot2',
-          brush = brushOpts(id = 'scb1')
+          ns('clusterPlot2'),
+          brush = brushOpts(id = ns('scb1'))
         )
       )
     ),
@@ -82,7 +86,7 @@ selectionCellsPanelUI <- function(id) {
       column(
         2,
         tagAppendAttributes(
-          textInput('heatmap_geneids2', 'Comma seperated gene names', value = 'Il6,Cd3d'),
+          textInput(ns('heatmap_geneids2'), 'Comma seperated gene names', value = 'Il6,Cd3d'),
           `data-proxy-click` = ns("goButton6")
         ),
         actionEnterButton(ns('goButton6'), 'Run')
@@ -93,7 +97,7 @@ selectionCellsPanelUI <- function(id) {
       column(
         10,
         offset = 1,
-        plotOutput('selectedHeatmap')
+        plotOutput(ns('selectedHeatmap'))
       )
     )
   )
@@ -104,7 +108,7 @@ binarizePanelUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    id,
+    ns(id),
     tags$ul(
       tags$li(
         strong('Binary Expression'),
@@ -119,19 +123,23 @@ binarizePanelUI <- function(id) {
     fluidRow(
       column(
         2,
-        uiOutput("clusters3")
+        uiOutput(ns("clusters3"))
       ),
 
-      dimensionSelection('dimension_x3', 'X', default='V1'),
-      dimensionSelection('dimension_y3', 'Y', default='V2'),
+      dimensionSelection(ns('dimension_x3'), 'X', default='V1'),
+      dimensionSelection(ns('dimension_y3'), 'Y', default='V2'),
 
       column(
         2,
         tagAppendAttributes(
-          textInput('mclustids', 'Comma seperated gene names', value = 'Il6'),
-          `data-proxy-click` = "goButton7"
+          textInput(
+            ns('mclustids'),
+            'Comma seperated gene names',
+            value = 'Il6'
+          ),
+          `data-proxy-click` = ns("goButton7")
         ),
-        actionEnterButton('goButton7', 'Run')
+        actionEnterButton(ns('goButton7'), 'Run')
       )
     ),
 
@@ -139,7 +147,7 @@ binarizePanelUI <- function(id) {
       column(
         10,
         offset = 1,
-        plotOutput('plotCoExpression')
+        plotOutput(ns('plotCoExpression'))
       )
     ),
 
@@ -148,7 +156,7 @@ binarizePanelUI <- function(id) {
         align = "center",
         style = "margin-center:50px; margin-top:25px",
         downloadButton(
-          "downloadExpressionOnOff",
+          ns("downloadExpressionOnOff"),
           "Download Expression +ve Cells in cluster"
         )
       )
@@ -164,7 +172,7 @@ binarizePanelUI <- function(id) {
       column(
         6,
         offset = 3,
-        DT::dataTableOutput('onOffTable')
+        DT::dataTableOutput(ns('onOffTable'))
       )
     )
   )

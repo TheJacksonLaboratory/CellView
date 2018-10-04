@@ -2,14 +2,16 @@ mainPageUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    id,
+    ns(id),
     fluidRow(
       div(
         h3("CellView"),
         align = "center"
       )
     ),
+
     br(),
+
     fluidRow(
       div(
         h5(
@@ -19,8 +21,9 @@ mainPageUI <- function(id) {
         align = "center"
       )
     ),
-    br(),
-    br(),
+
+    br(), br(),
+
     fluidRow(
       column(
         5,
@@ -47,6 +50,7 @@ mainPageUI <- function(id) {
         htmlOutput(ns("summaryStats"))
       )
     ),
+
     br(),
 
     fluidRow(

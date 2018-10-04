@@ -2,9 +2,9 @@ subclusterPageUI <- function(id) {
   ns <- NS(id)
 
   navbarMenu(
-    id,
+    ns(id),
 
-    dgeAnalysisTabUI("DGE Analysis")
+    dgeAnalysisTabUI(ns("DGE Analysis"))
   )
 }
 
@@ -12,7 +12,7 @@ dgeAnalysisTabUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    id,
+    ns(id),
     tags$ul(
       tags$li(
         strong('Subclustering'),
@@ -23,15 +23,15 @@ dgeAnalysisTabUI <- function(id) {
     fluidRow(
       column(
         2,
-        uiOutput("clusters1")
+        uiOutput(ns("clusters1"))
       ),
 
-      dimensionSelection('dimension_x1', 'X', default='V1'),
-      dimensionSelection('dimension_y1', 'Y', default='V2'),
+      dimensionSelection(ns('dimension_x1'), 'X', default='V1'),
+      dimensionSelection(ns('dimension_y1'), 'Y', default='V2'),
 
       column(
         2,
-        actionEnterButton('goButton2', 'Plot')
+        actionEnterButton(ns('goButton2'), 'Plot')
       )
     ),
 
@@ -39,23 +39,23 @@ dgeAnalysisTabUI <- function(id) {
       column(
         4,
         plotOutput(
-          'dge_plot1',
-          brush = brushOpts(id = "db1")
+          ns('dge_plot1'),
+          brush = brushOpts(id = ns("db1"))
         )
       ),
 
       column(
         4,
         plotOutput(
-          'dge_plot2',
-          brush = brushOpts(id = 'db2')
+          ns('dge_plot2'),
+          brush = brushOpts(id = ns('db2'))
         )
       ),
 
       column(
         2,
         actionEnterButton(
-          'goButton3',
+          ns('goButton3'),
           'Differential'
         )
       )
@@ -63,14 +63,14 @@ dgeAnalysisTabUI <- function(id) {
 
     fluidRow(
       h4('Top Differentially Expressed Genes', offset = 1),
-      DT::dataTableOutput('dge')
+      DT::dataTableOutput(ns('dge'))
     ),
 
     fluidRow(
       div(
         align = "right",
         style = "margin-right:15px; margin-bottom:10px",
-        downloadButton("download_dge_table", "Download DGE Table")
+        downloadButton(ns("download_dge_table"), "Download DGE Table")
       )
     )
   )

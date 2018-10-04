@@ -2,9 +2,9 @@ explorePageUI <- function(id) {
   ns <- NS(id)
 
   navbarMenu(
-    id,
-    expressionTabUI("Expression"),
-    panelTabUI("Panel plot")
+    ns(id),
+    expressionTabUI(ns("Expression")),
+    panelTabUI(ns("Panel plot"))
   )
 }
 
@@ -12,7 +12,7 @@ expressionTabUI <- function(id) {
   ns <- NS(id)
 
   tabPanel(
-    id,
+    ns(id),
     fluidRow(
       div(
         p(strong('\tInformation:')),
@@ -36,68 +36,58 @@ expressionTabUI <- function(id) {
         )
       )
     ),
-    br(),
-    br(),
+
+    br(),br(),
+
     fluidRow(
       column(
         2,
         tagAppendAttributes(
-          textInput('gene_id', 'Enter gene', value = 'Il6'),
-          `data-proxy-click` = "goButton"
+          textInput(ns('gene_id'), 'Enter gene', value = 'Il6'),
+          `data-proxy-click` = ns("goButton")
         ),
-        actionEnterButton('goButton', 'Run')
+        actionEnterButton(ns('goButton'), 'Run')
       ),
+
       column(
         2,
-        uiOutput("clusters")
+        uiOutput(ns("clusters"))
       ),
-      column(
-        2,
-        selectInput(
-          'dimension_x',
-          label = 'X',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V1'
-        )
-      ),
-      column(
-        2,
-        selectInput(
-          'dimension_y',
-          label = 'Y',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V2'
-        )
-      ),
+
+      dimensionSelection(ns('dimension_x'), 'X', default='V1'),
+      dimensionSelection(ns('dimension_y'), 'Y', default='V2'),
+
       column(
         2,
         div(
           align = "center",
           style = "margin-center:50px; margin-top:25px",
-          downloadButton("downloadExpression", "Download Expression")
+          downloadButton(ns("downloadExpression"), "Download Expression")
         )
       )
     ),
-    br(),
-    br(),
-    br(),
+
+    br(),br(),br(),
+
     fluidRow(
       column(
         5,
         offset = 1,
-        plotlyOutput('tsne_plt')
+        plotlyOutput(ns('tsne_plt'))
       ),
+
       column(
         5,
         offset = 0,
-        plotOutput('clusterPlot', brush = brushOpts(id = 'b1'))
+        plotOutput(ns('clusterPlot'), brush = brushOpts(id = ns('b1')))
       )
     ),
+
     fluidRow(
       column(
         10,
         offset = 1,
-        plotOutput('gene_vio_plot')
+        plotOutput(ns('gene_vio_plot'))
       )
     )
   )
@@ -122,20 +112,19 @@ panelTabUI <- function(id) {
     fluidRow(
       column(
         2,
-        uiOutput("clusters4")
+        uiOutput(ns("clusters4"))
       ),
 
-      dimensionSelection('dimension_x4', 'X', default='V1'),
-
-      dimensionSelection('dimension_y4', 'Y', default='V2'),
+      dimensionSelection(ns('dimension_x4'), 'X', default='V1'),
+      dimensionSelection(ns('dimension_y4'), 'Y', default='V2'),
 
       column(
         2,
         tagAppendAttributes(
-          textInput('panelplotids', 'Comma seperated gene names', value = 'Il6'),
-          `data-proxy-click` = "goButton8"
+          textInput(ns('panelplotids'), 'Comma seperated gene names', value = 'Il6'),
+          `data-proxy-click` = ns("goButton8")
         ),
-        actionEnterButton('goButton8', 'Run')
+        actionEnterButton(ns('goButton8'), 'Run')
       )
     ),
 
@@ -143,7 +132,7 @@ panelTabUI <- function(id) {
       column(
         10,
         offset = 1,
-        plotOutput('panelPlot')
+        plotOutput(ns('panelPlot'))
       )
     )
   )
