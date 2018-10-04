@@ -13,8 +13,6 @@ library(edgeR)
 
 source("utils.R")
 source("plots.R")
-source("modules/elements.R")
-source("modules/mainPage.R")
-source("modules/explorePage.R")
-source("modules/coexpressionPage.R")
-source("modules/subclusterPage.R")
+
+sapply(list.files("modules/ui"), source)
+sapply(list.files("modules/backend"), source)
