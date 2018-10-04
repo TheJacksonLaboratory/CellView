@@ -15,16 +15,6 @@ library(reshape)
 source("utils.R")
 source("plots.R")
 
-shinyServer(function(input, output) {
-
-  dataTables <- reactiveValues(
-    log2cpm = NULL,
-    tsne.data = NULL,
-    featuredata = NULL,
-    selectedDge = NULL
-  )
-}
-
 init_server <- function() {
   set.seed(1)
   options(shiny.maxRequestSize = 2000 * 1024 ^ 2)
