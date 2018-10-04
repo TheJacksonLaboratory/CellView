@@ -14,5 +14,5 @@ library(edgeR)
 source("utils.R")
 source("plots.R")
 
-sapply(list.files("modules/ui"), source)
-sapply(list.files("modules/backend"), source)
+sapply(list.files("modules/ui", full.names=T), source)
+sapply(list.files("modules/backend", full.names=T), source)
