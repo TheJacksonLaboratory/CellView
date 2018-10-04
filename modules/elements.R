@@ -14,6 +14,6 @@ enterButtonJS <- '
 actionEnterButton <- function(id, label) {
   ns <- NS(id)
 
-  tags$head(tags$script(HTML(enterButtonJS))),
+  tags$head(tags$script(HTML(enterButtonJS)))
   actionButton(id, label)
 }

@@ -1,4 +1,4 @@
-coexpressionPageUI() <- function(id) {
+coexpressionPageUI <- function(id) {
   ns <- NS(id)
 
   navbarMenu(
@@ -18,12 +18,11 @@ allClustersPanelUI <- function(id) {
     fluidRow(
       column(
         2,
-        tags$head(tags$script(HTML(jscode))),
-          tagAppendAttributes(
-            textInput('heatmap_geneids', 'Comma seperated gene names', value = 'Il6,Cd3d,Genes,Umi'),
-            `data-proxy-click` = "goButton1"
-          ),
-        actionButton('goButton1', 'Run')
+        tagAppendAttributes(
+          textInput('heatmap_geneids', 'Comma seperated gene names', value = 'Il6,Cd3d,Genes,Umi'),
+          `data-proxy-click` = "goButton1"
+        ),
+        actionEnterButton('goButton1', 'Run')
       )
     ),
 
@@ -52,12 +51,11 @@ selectionCellsPanelUI <- function(id) {
     fluidRow(
       column(
         2,
-        tags$head(tags$script(HTML(jscode))),
           tagAppendAttributes(
             textInput('gene_id_sch', 'Enter gene', value = 'Il6'),
             `data-proxy-click` = "goButton5"
           ),
-        actionButton('goButton5', 'Run')
+        actionEnterButton('goButton5', 'Run')
       ),
 
       column(
@@ -100,20 +98,20 @@ selectionCellsPanelUI <- function(id) {
     fluidRow(
       column(
         2,
-        tags$head(tags$script(HTML(jscode))),
         tagAppendAttributes(
           textInput('heatmap_geneids2', 'Comma seperated gene names', value = 'Il6,Cd3d'),
           `data-proxy-click` = "goButton6"
         ),
-      actionButton('goButton6', 'Run')
-    )
-  ),
+        actionEnterButton('goButton6', 'Run')
+      )
+    ),
 
-  fluidRow(
-    column(
-      10,
-      offset = 1,
-      plotOutput('selectedHeatmap')
+    fluidRow(
+      column(
+        10,
+        offset = 1,
+        plotOutput('selectedHeatmap')
+      )
     )
   )
 }
@@ -163,45 +161,45 @@ binarizePanelUI <- function(id) {
 
       column(
         2,
-        tags$head(tags$script(HTML(jscode))),
         tagAppendAttributes(
           textInput('mclustids', 'Comma seperated gene names', value = 'Il6'),
           `data-proxy-click` = "goButton7"
         ),
-      actionButton('goButton7', 'Run')
-    )
-  ),
-
-  fluidRow(
-    column(
-      10,
-      offset = 1,
-      plotOutput('plotCoExpression')
-    )
-  ),
-
-  fluidRow(
-    div(
-      align = "center",
-      style = "margin-center:50px; margin-top:25px",
-      downloadButton(
-        "downloadExpressionOnOff",
-        "Download Expression +ve Cells in cluster"
+        actionEnterButton('goButton7', 'Run')
       )
-    )
-  ),
-
-  br(), br(), br(),
-
-  fluidRow(
-    h4(
-      'Positive Cells in all clusters',
-      align = "center"
     ),
-    column(
-      6,
-      offset = 3,
-      DT::dataTableOutput('onOffTable')
+
+    fluidRow(
+      column(
+        10,
+        offset = 1,
+        plotOutput('plotCoExpression')
+      )
+    ),
+
+    fluidRow(
+      div(
+        align = "center",
+        style = "margin-center:50px; margin-top:25px",
+        downloadButton(
+          "downloadExpressionOnOff",
+          "Download Expression +ve Cells in cluster"
+        )
+      )
+    ),
+
+    br(), br(), br(),
+
+    fluidRow(
+      h4(
+        'Positive Cells in all clusters',
+        align = "center"
+      ),
+      column(
+        6,
+        offset = 3,
+        DT::dataTableOutput('onOffTable')
+      )
     )
   )
 }

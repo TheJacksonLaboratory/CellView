@@ -41,12 +41,11 @@ expressionTabUI <- function(id) {
     fluidRow(
       column(
         2,
-        tags$head(tags$script(HTML(jscode))),
         tagAppendAttributes(
           textInput('gene_id', 'Enter gene', value = 'Il6'),
           `data-proxy-click` = "goButton"
         ),
-        actionButton('goButton', 'Run')
+        actionEnterButton('goButton', 'Run')
       ),
       column(
         2,
@@ -148,12 +147,11 @@ panelTabUI <- function(id) {
 
       column(
         2,
-        tags$head(tags$script(HTML(jscode))),
         tagAppendAttributes(
           textInput('panelplotids', 'Comma seperated gene names', value = 'Il6'),
           `data-proxy-click` = "goButton8"
         ),
-        actionButton('goButton8', 'Run')
+        actionEnterButton('goButton8', 'Run')
       )
     ),
 
