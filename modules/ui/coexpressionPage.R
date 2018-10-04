@@ -51,10 +51,10 @@ selectionCellsPanelUI <- function(id) {
     fluidRow(
       column(
         2,
-          tagAppendAttributes(
-            textInput('gene_id_sch', 'Enter gene', value = 'Il6'),
-            `data-proxy-click` = "goButton5"
-          ),
+        tagAppendAttributes(
+          textInput('gene_id_sch', 'Enter gene', value = 'Il6'),
+          `data-proxy-click` = "goButton5"
+        ),
         actionEnterButton('goButton5', 'Run')
       ),
 
@@ -64,7 +64,7 @@ selectionCellsPanelUI <- function(id) {
       ),
 
       dimensionSelection('dimension_x2', 'X', default='V1'),
-      dimensionSelection('dimension_y2', 'Y', default='V2'),
+      dimensionSelection('dimension_y2', 'Y', default='V2')
     ),
 
     fluidRow(
@@ -83,9 +83,9 @@ selectionCellsPanelUI <- function(id) {
         2,
         tagAppendAttributes(
           textInput('heatmap_geneids2', 'Comma seperated gene names', value = 'Il6,Cd3d'),
-          `data-proxy-click` = "goButton6"
+          `data-proxy-click` = ns("goButton6")
         ),
-        actionEnterButton('goButton6', 'Run')
+        actionEnterButton(ns('goButton6'), 'Run')
       )
     ),
 

@@ -10,6 +10,7 @@ enterButtonJS <- '
     });
   });
 '
+tags$head(tags$script(HTML(enterButtonJS)))
 
 actionEnterButton <- function(id, label) {
   ns <- NS(id)
