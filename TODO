@@ -1,8 +1,9 @@
 UI reorganization
 -[x] Move pages into modules
 -[ ] Update pages to use their namespaces
--[ ] Fix buttons
--[ ] Create reusable elements for common design patterns (e.g. cluster selection)
+-[x] Fix buttons
+-[ ] Create reusable elements for common design patterns
+    -[x] cluster selection
 
 Server reorganization
 -[ ] Move plotting functionality into modules

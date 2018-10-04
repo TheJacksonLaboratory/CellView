@@ -26,25 +26,8 @@ dgeAnalysisTabUI <- function(id) {
         uiOutput("clusters1")
       ),
 
-      column(
-        2,
-        selectInput(
-          'dimension_x1',
-          label = 'X',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V1'
-        )
-      ),
-
-      column(
-        2,
-        selectInput(
-          'dimension_y1',
-          label = 'Y',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V2'
-        )
-      ),
+      dimensionSelection('dimension_x1', 'X', default='V1'),
+      dimensionSelection('dimension_y1', 'Y', default='V2'),
 
       column(
         2,

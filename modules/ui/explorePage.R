@@ -125,25 +125,9 @@ panelTabUI <- function(id) {
         uiOutput("clusters4")
       ),
 
-      column(
-        2,
-        selectInput(
-          'dimension_x4',
-          label = 'X',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V1'
-        )
-      ),
+      dimensionSelection('dimension_x4', 'X', default='V1'),
 
-      column(
-        2,
-        selectInput(
-          'dimension_y4',
-          label = 'Y',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V2'
-        )
-      ),
+      dimensionSelection('dimension_y4', 'Y', default='V2'),
 
       column(
         2,

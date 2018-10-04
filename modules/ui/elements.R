@@ -17,3 +17,17 @@ actionEnterButton <- function(id, label) {
   tags$head(tags$script(HTML(enterButtonJS)))
   actionButton(id, label)
 }
+
+dimensionSelection <- function(id, label, default = 'V1') {
+  ns <- NS(id)
+
+  column(
+    2,
+    selectInput(
+      id,
+      label = label,
+      choice = c('V1', 'V2', 'V3'),
+      selected = default
+    )
+  )
+}

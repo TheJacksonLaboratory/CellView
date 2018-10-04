@@ -63,25 +63,8 @@ selectionCellsPanelUI <- function(id) {
         uiOutput("clusters2")
       ),
 
-      column(
-        2,
-        selectInput(
-          'dimension_x2',
-          label = 'X',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V1'
-        )
-      ),
-
-      column(
-        2,
-        selectInput(
-          'dimension_y2',
-          label = 'Y',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V2'
-        )
-      )
+      dimensionSelection('dimension_x2', 'X', default='V1'),
+      dimensionSelection('dimension_y2', 'Y', default='V2'),
     ),
 
     fluidRow(
@@ -139,25 +122,8 @@ binarizePanelUI <- function(id) {
         uiOutput("clusters3")
       ),
 
-      column(
-        2,
-        selectInput(
-          'dimension_x3',
-          label = 'X',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V1'
-        )
-      ),
-
-      column(
-        2,
-        selectInput(
-          'dimension_y3',
-          label = 'Y',
-          choice = c('V1', 'V2', 'V3'),
-          selected = 'V2'
-        )
-      ),
+      dimensionSelection('dimension_x3', 'X', default='V1'),
+      dimensionSelection('dimension_y3', 'Y', default='V2'),
 
       column(
         2,
