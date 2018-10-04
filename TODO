@@ -1,0 +1,16 @@
+UI reorganization
+-[x] Move pages into modules
+-[ ] Update pages to use their namespaces
+-[ ] Fix buttons
+-[ ] Create reusable elements for common design patterns (e.g. cluster selection)
+
+Server reorganization
+-[ ] Move plotting functionality into modules
+-[ ] Create reusable functions for common functions
+-[ ] Update how data tables are stored
+
+Long term
+-[ ] Add new functionality as described
+     [here](https://github.com/TheJacksonLaboratory/CellView/issues/2)
+-[ ] Remove dependence on hardcoded variables
+-[ ] Use Seurat? backend

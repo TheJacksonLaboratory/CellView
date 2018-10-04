@@ -1,19 +1,5 @@
 # LIBRARY -----------------------------------------------------------------
 
-library(shiny)
-library(plotly)
-library(shinythemes)
-library(ggplot2)
-library(DT)
-library(pheatmap)
-library(threejs)
-library(sm)
-library(RColorBrewer)
-library(mclust)
-library(reshape)
-
-source("utils.R")
-source("plots.R")
 
 init_server <- function() {
   set.seed(1)
