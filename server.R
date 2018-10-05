@@ -194,20 +194,7 @@ shinyServer(function(input, output) {
         geom_point(shape = 1,
                    size = 4,
                    colour = "black") +
-        theme_bw() +
-        theme(
-          axis.text.x = element_text(
-            angle = 90,
-            size = 12,
-            vjust = 0.5
-          ),
-          axis.text.y = element_text(size = 12),
-          strip.text.x = element_text(size = 16),
-          strip.text.y = element_text(size = 14),
-          axis.title.x = element_text(face = "bold", size = 16),
-          axis.title.y = element_text(face = "bold", size = 16),
-          legend.position = "none"
-        ) +
+        plot_theme() +
         ggtitle(paste(toupper(input$gene_id), input$cluster, sep = '-Cluster')) +
         scale_colour_gradient2(low = 'grey50', high = "red")
       p1
@@ -240,20 +227,7 @@ shinyServer(function(input, output) {
           color = 'black'
         ) +
         stat_summary(fun.data = n_fun, geom = "text") +
-        theme_bw() +
-        theme(
-          axis.text.x = element_text(
-            angle = 90,
-            size = 12,
-            vjust = 0.5
-          ),
-          axis.text.y = element_text(size = 12),
-          strip.text.x = element_text(size = 16),
-          strip.text.y = element_text(size = 14),
-          axis.title.x = element_text(face = "bold", size = 16),
-          axis.title.y = element_text(face = "bold", size = 16),
-          legend.position = "none"
-        ) +
+	plot_theme() +        
         xlab('Cluster') +
         ylab('Expression') +
         ggtitle(toupper(input$gene_id))
@@ -516,20 +490,7 @@ shinyServer(function(input, output) {
         geom_point(shape = 1,
                    size = 4,
                    colour = "black") +
-        theme_bw() +
-        theme(
-          axis.text.x = element_text(
-            angle = 90,
-            size = 12,
-            vjust = 0.5
-          ),
-          axis.text.y = element_text(size = 10),
-          strip.text.x = element_text(size = 16),
-          strip.text.y = element_text(size = 14),
-          axis.title.x = element_text(face = "bold", size = 16),
-          axis.title.y = element_text(face = "bold", size = 16),
-          legend.position = "none"
-        ) +
+	plot_theme() +        
         ggtitle(paste(toupper(input$gene_id_sch), input$clusters2, sep =
                         '-Cluster')) +
         scale_colour_gradient2(low = 'grey50', high = "red")
@@ -648,21 +609,7 @@ shinyServer(function(input, output) {
         geom_point(shape = 1,
                    size = 4,
                    colour = "black") +
-        theme_bw() +
-        theme(
-          axis.text.x = element_text(
-            angle = 90,
-            size = 12,
-            vjust = 0.5
-          ),
-          axis.text.y = element_text(size = 12),
-          strip.text.x = element_text(size = 16),
-          strip.text.y = element_text(size = 14),
-          axis.title.x = element_text(face = "bold", size = 16),
-          axis.title.y = element_text(face = "bold", size = 16),
-          legend.position = "none"
-        ) +
-        #ggtitle(paste(toupper(input$gene_id),input$cluster,sep='-Cluster'))+
+        plot_theme() +
         scale_colour_gradient2(low = 'grey50', high = "red")
       p1
     })
@@ -729,29 +676,8 @@ shinyServer(function(input, output) {
       tsne.data <- dataTables$tsne.data
 
       subsetData <- subset(tsne.data, dbCluster == input$clusters1)
-      p1 <-
-        ggplot(subsetData,
-               aes_string(x = input$dimension_x1, y = input$dimension_y1)) +
-        geom_point() +
-        geom_point(shape = 1,
-                   size = 4,
-                   color = "black") +
-        theme_bw() +
-        theme(
-          axis.text.x = element_text(
-            angle = 90,
-            size = 12,
-            vjust = 0.5
-          ),
-          axis.text.y = element_text(size = 12),
-          strip.text.x = element_text(size = 16),
-          strip.text.y = element_text(size = 14),
-          axis.title.x = element_text(face = "bold", size = 16),
-          axis.title.y = element_text(face = "bold", size = 16),
-          legend.position = "none"
-        ) +
-        ggtitle(input$clusters1)
-      p1
+      
+      tsne_2D_plot      
     })
   })
   # SUBCLUSTER DGE PLOT2 ------------------------------------------------------------------
@@ -764,29 +690,8 @@ shinyServer(function(input, output) {
       tsne.data <- dataTables$tsne.data
 
       subsetData <- subset(tsne.data, dbCluster == input$clusters1)
-      p1 <-
-        ggplot(subsetData,
-               aes_string(x = input$dimension_x1, y = input$dimension_y1)) +
-        geom_point() +
-        geom_point(shape = 1,
-                   size = 4,
-                   color = "black") +
-        theme_bw() +
-        theme(
-          axis.text.x = element_text(
-            angle = 90,
-            size = 12,
-            vjust = 0.5
-          ),
-          axis.text.y = element_text(size = 12),
-          strip.text.x = element_text(size = 16),
-          strip.text.y = element_text(size = 14),
-          axis.title.x = element_text(face = "bold", size = 16),
-          axis.title.y = element_text(face = "bold", size = 16),
-          legend.position = "none"
-        ) +
-        ggtitle(input$clusters1)
-      p1
+    
+      tsne_2D_plot
     })
   })
   # SUBCLUSTER DGE ANALYSIS ------------------------------------------------------------------
