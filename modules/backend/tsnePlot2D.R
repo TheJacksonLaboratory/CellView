@@ -1,4 +1,13 @@
-## 2D tsne plot 
+#Section modified:
+### SUBCLUSTER DGE PLOT1 ----------- plot (p1) replaced by tsne_2D_plot()
+### SUBCLUSTER DGE PLOT2 ----------- plot (p1) replaced by tsne_2D_plot()
+### EXPLORE TAB CLUSTER PLOT ------- plot theme for plot (p1) replaced by plot_theme()
+### EXPLORE TAB VIOLIN PLOT -------- plot theme for violin plot (p1) replaced by plot_theme()
+### CO EXPRESSION TAB CLUSTER PLOT - plot theme for plot (p1) replaced by plot_theme()
+### CO EXPRESSION TAB ON/OFF PLOT -- plot theme for plot (p1) replaced by plot_theme()
+##########################################################################
+
+## 2D tsne plot ------------------------
 tsne_2D_plot <- function(input, output, session){
   ggplot(subsetData,
     aes_string(x = input$dimension_x1, y = input$dimension_y1)) +
