@@ -641,7 +641,7 @@ shinyServer(function(input, output) {
 
       subsetData <- subset(tsne.data, dbCluster == input$clusters1)
       
-      tsne_2D_plot      
+      tsne_2D_plot()     
     })
   })
   # SUBCLUSTER DGE PLOT2 ------------------------------------------------------------------
@@ -655,7 +655,7 @@ shinyServer(function(input, output) {
 
       subsetData <- subset(tsne.data, dbCluster == input$clusters1)
     
-      tsne_2D_plot
+      tsne_2D_plot()
     })
   })
   # SUBCLUSTER DGE ANALYSIS ------------------------------------------------------------------
