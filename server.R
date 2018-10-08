@@ -416,28 +416,9 @@ shinyServer(function(input, output) {
       annotation <- data.frame(factor(tsne.data$dbCluster))
       rownames(annotation) <- colnames(expression)
       colnames(annotation) <- c('Cluster')
-
-      h <-
-        pheatmap(
-          as.matrix(expression),
-          cluster_rows = TRUE,
-          cluster_cols = FALSE,
-          scale = 'row',
-          fontsize_row = 10,
-          labels_col = colnames(expression),
-          labels_row = dataTables$featuredata[rownames(expression), 'Associated.Gene.Name'],
-          show_rownames = TRUE,
-          annotation_col = annotation,
-          show_colnames = FALSE,
-          annotation_legend = TRUE,
-          breaks = seq(-6, 6, by = .12),
-          colorRampPalette(rev(brewer.pal(
-            n = 6, name =
-              "RdBu"
-          )))(100)
-
-        )
-      h
+      
+      heat_map(cluster_cols=FALSE, annotation_col=annotation)
+      heat_map
 
       # h3<-heatmap.3(as.matrix(expression),
       #               Colv = F,
@@ -530,26 +511,9 @@ shinyServer(function(input, output) {
         is.na(sum(expression)) != TRUE,
         'Gene symbol incorrect or genes not expressed'
       ))
-
-      h <-
-        pheatmap(
-          as.matrix(expression),
-          cluster_rows = TRUE,
-          cluster_cols = TRUE,
-          scale = 'row',
-          fontsize_row = 10,
-          labels_col = colnames(expression),
-          labels_row = dataTables$featuredata[rownames(expression), 'Associated.Gene.Name'],
-          show_rownames = TRUE,
-          show_colnames = FALSE,
-          breaks = seq(-6, 6, by = .12),
-          colorRampPalette(rev(brewer.pal(
-            n = 6, name =
-              "RdBu"
-          )))(100)
-
-        )
-      h
+      
+      heat_map(cluster_cols=TRUE)
+      heat_map
     })
   })
 
