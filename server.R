@@ -110,8 +110,12 @@ shinyServer(function(input, output) {
     #cat(stderr(),colnames(tsne.data)[1:5])
     tsne.data$dbCluster <- as.factor(tsne.data$dbCluster)
 
-    layout(tsne_3D_layout)
-
+    callModule(tsne_3d_plot, 
+               data = tsne.data,
+               title = NULL,
+               color = ~ dbCluster,
+               size = rep(10, nrow(tsne.data)))
+    
   })
 
   # SUMMARY STATS ----------------------------------------------------------------
@@ -167,7 +171,11 @@ shinyServer(function(input, output) {
       tsne.data <- cbind(dataTables$tsne.data, t(expression))
       names(tsne.data)[names(tsne.data) == geneid] <- 'values'
 
-      layout(tsne_3D_layout, title = toupper(input$gene_id))
+      callModule(tsne_3d_layout,
+                 data = tsne.data,
+                 title = toupper(input$gene_id),
+                 color = ~ values,
+                 size = 2)
     })
   })
   # EXPLORE TAB CLUSTER PLOT ------------------------------------------------------------------
