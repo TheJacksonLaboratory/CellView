@@ -194,7 +194,7 @@ shinyServer(function(input, output) {
         geom_point(shape = 1,
                    size = 4,
                    colour = "black") +
-        plot_theme() +
+        callModule(plot_theme) +
         ggtitle(paste(toupper(input$gene_id), input$cluster, sep = '-Cluster')) +
         scale_colour_gradient2(low = 'grey50', high = "red")
       p1
@@ -227,7 +227,7 @@ shinyServer(function(input, output) {
           color = 'black'
         ) +
         stat_summary(fun.data = n_fun, geom = "text") +
-	plot_theme() +        
+	callModule(plot_theme) +        
         xlab('Cluster') +
         ylab('Expression') +
         ggtitle(toupper(input$gene_id))
@@ -470,7 +470,7 @@ shinyServer(function(input, output) {
         geom_point(shape = 1,
                    size = 4,
                    colour = "black") +
-	plot_theme() +        
+	callModule(plot_theme) +        
         ggtitle(paste(toupper(input$gene_id_sch), input$clusters2, sep =
                         '-Cluster')) +
         scale_colour_gradient2(low = 'grey50', high = "red")
@@ -571,7 +571,7 @@ shinyServer(function(input, output) {
         geom_point(shape = 1,
                    size = 4,
                    colour = "black") +
-        plot_theme() +
+        callModule(plot_theme) +
         scale_colour_gradient2(low = 'grey50', high = "red")
       p1
     })
@@ -639,7 +639,7 @@ shinyServer(function(input, output) {
 
       subsetData <- subset(tsne.data, dbCluster == input$clusters1)
       
-      tsne_2D_plot()     
+      callModule(tsne_2d_plot, data = subsetData)     
     })
   })
   # SUBCLUSTER DGE PLOT2 ------------------------------------------------------------------
@@ -653,7 +653,7 @@ shinyServer(function(input, output) {
 
       subsetData <- subset(tsne.data, dbCluster == input$clusters1)
     
-      tsne_2D_plot()
+      callModule(tsne_2d_plot, data = subsetData)
     })
   })
   # SUBCLUSTER DGE ANALYSIS ------------------------------------------------------------------
