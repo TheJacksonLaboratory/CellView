@@ -416,10 +416,9 @@ shinyServer(function(input, output) {
       annotation <- data.frame(factor(tsne.data$dbCluster))
       rownames(annotation) <- colnames(expression)
       colnames(annotation) <- c('Cluster')
-      
-      heat_map(cluster_cols=FALSE, annotation_col=annotation)
-      heat_map
-
+        
+      callModule(heat_map, data = expression, cluster_cols = FALSE, annotation_col = annotation)
+     
       # h3<-heatmap.3(as.matrix(expression),
       #               Colv = F,
       #               Rowv=F,
@@ -512,8 +511,7 @@ shinyServer(function(input, output) {
         'Gene symbol incorrect or genes not expressed'
       ))
       
-      heat_map(cluster_cols=TRUE)
-      heat_map
+      callModule(heat_map, data = expression, cluster_cols = TRUE)
     })
   })
 
