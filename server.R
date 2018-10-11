@@ -115,9 +115,7 @@ shinyServer(function(input, output) {
 
   # EXPLORE TAB 3D PLOT ------------------------------------------------------------------
   genes <- eventReactive(input$goButton, {
-    genesin <- input$genesList
-    genesin <- strsplit(genesin, ',')
-    return(genesin)
+    callModule(get_genesin, data = genesList, list_genesin = "genesList")
   })
 
   v <- reactiveValues(doPlot = FALSE)
@@ -265,10 +263,9 @@ shinyServer(function(input, output) {
       return()
 
     isolate({
-      genesin <- input$panelplotids
-      genesin <- toupper(genesin)
-      genesin <- strsplit(genesin, ',')
-      genesin<-genesin[[1]]
+      callModule(get_genesin, 
+                 data = panelplotids,
+                 data_name = "panelplotids" )
 
       cat(file=stderr(),length(genesin))
       par(mfrow=c(ceiling(length(genesin)/4),4), mai = c(0, 0., 0., 0.))
@@ -374,9 +371,9 @@ shinyServer(function(input, output) {
       return()
 
     isolate({
-      genesin <- input$heatmap_geneids
-      genesin <- toupper(genesin)
-      genesin <- strsplit(genesin, ',')
+      callModule(get_genesin, 
+                 data = heatmap_geneids,
+                 data_name = "heatmap_geneids")
 
       map <- rownames(dataTables$featuredata[which(dataTables$featuredata$Associated.Gene.Name %in% genesin[[1]]), ])
       cat(file = stderr(), length(map))
@@ -469,9 +466,9 @@ shinyServer(function(input, output) {
       return()
 
     isolate({
-      genesin <- input$heatmap_geneids2
-      genesin <- toupper(genesin)
-      genesin <- strsplit(genesin, ',')
+      callModule(get_genesin,
+                 data = heatmap_geneids2,
+                 data_name = "heatmap_geneids2")
 
       subsetData <-
         subset(dataTables$tsne.data, dbCluster == input$clusters2)
@@ -507,9 +504,9 @@ shinyServer(function(input, output) {
       return()
 
     isolate({
-      genesin <- input$mclustids
-      genesin <- toupper(genesin)
-      genesin <- strsplit(genesin, ',')
+      callModule(get_genesin, 
+                 data = mclustids, 
+                 data_name = "mclustids")
 
       subsetData <-
         subset(dataTables$tsne.data, dbCluster == input$clusters3)
