@@ -47,57 +47,30 @@ shinyServer(function(input, output) {
 
 
   # RENDER UI  ------------------------------------------------------------------
-  output$clusters <- renderUI({
-    noOfClusters <- max(dataTables$tsne.data$dbCluster)
-    selectInput(
-      "cluster",
-      label = "Cluster",
-      choices = c(0:noOfClusters),
-      selected = 1
-    )
-  })
+  
+  callModule(render_noOfClusters,
+             data = dataTables$tsne.data$dbCluster,
+             cluster = "cluster",
+             choices = c(0:noOfClusters))
 
-  output$clusters1 <- renderUI({
-    noOfClusters <- max(dataTables$tsne.data$dbCluster)
-    selectInput(
-      "clusters1",
-      label = "Cluster",
-      choices = c(0:noOfClusters),
-      selected = 1
-    )
-  })
+  callModule(render_noOfClusters,
+             data = dataTables$tsne.data$dbCluster, 
+             cluster = "cluster1",
+             choices = c(0:noOfClusters))
 
-  output$clusters2 <- renderUI({
-    noOfClusters <- max(dataTables$tsne.data$dbCluster)
-    selectInput(
-      "clusters2",
-      label = "Cluster",
-      choices = c(0:noOfClusters),
-      selected = 1
-    )
-  })
+  callModule(render_noOfClusters,
+             data = dataTables$tsne.data$dbCluster, 
+             cluster = "cluster2", choices = c(0:noOfClusters))
 
-  output$clusters3 <- renderUI({
-    noOfClusters <- max(dataTables$tsne.data$dbCluster)
-    selectInput(
-      "clusters3",
-      label = "Cluster",
-      choices = c(0:noOfClusters),
-      selected = 1
-    )
-  })
+  callModule(render_noOfClusters,
+             data = dataTables$tsne.data$dbCluster,
+             cluster = "cluster3", choices = c(0:noOfClusters))
 
-  output$clusters4 <- renderUI({
-    noOfClusters <- max(dataTables$tsne.data$dbCluster)
-    selectInput(
-      "clusters4",
-      label = "Cluster",
-      choices = c(c('All'),c(0:noOfClusters)),
-      selected = 1
-    )
-  })
-
-
+  callModule(render_noOfClusters, 
+             data = dataTables$tsne.data$dbCluster,
+             cluster = "cluster4",
+             choices = (c("All"), c(0:noOfClusters)))
+  
   # MAIN 3D PLOT ------------------------------------------------------------------
   output$tsne_main <- renderPlotly({
     inFile <- input$file1
