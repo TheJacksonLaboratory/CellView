@@ -18,6 +18,6 @@ get_genesin <- function(input, output, session, data, data_name){
     genesin <- toupper(genesin)
     genesin <- strsplit(genesin, ',')
     genesin<-genesin[[1]]
-  } else 
+  } else { 
     cat("Not in the list of possible options. \n Try again!")
-
+  }
