@@ -128,20 +128,7 @@ shinyServer(function(input, output) {
       return()
 
     isolate({
-      geneid <- rownames(dataTables$featuredata[which(dataTables$featuredata$Associated.Gene.Name ==
-                                                        toupper(input$gene_id)), ])[1]
-
-      expression <- dataTables$log2cpm[geneid, ]
-      cat(file = stderr(), rownames(expression))
-
-      validate(need(
-        is.na(sum(expression)) != TRUE,
-        'Gene symbol incorrect or gene not expressed'
-      ))
-
-      tsne.data <- cbind(dataTables$tsne.data, t(expression))
-      names(tsne.data)[names(tsne.data) == geneid] <- 'values'
-
+      callModule(subsetdata, dataTables = dataTables, tsne = TRUE)
       callModule(tsne_3d_layout,
                  data = tsne.data,
                  title = toupper(input$gene_id),
