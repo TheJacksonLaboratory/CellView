@@ -163,16 +163,7 @@ shinyServer(function(input, output) {
       return()
 
     isolate({
-      geneid <- rownames(dataTables$featuredata[which(dataTables$featuredata$Associated.Gene.Name ==
-                                                        toupper(input$gene_id)), ])[1]
-
-      expression <- dataTables$log2cpm[geneid, ]
-
-      validate(need(is.na(sum(expression)) != TRUE, ''))
-
-      tsne.data <- cbind(dataTables$tsne.data, t(expression))
-      names(tsne.data)[names(tsne.data) == geneid] <- 'values'
-      #tsne.data<-subset(tsne.data,dbCluster!=0)
+      callModule(subsetdata, dataTables = dataTables, tsne = TRUE)
 
       p1 <-
         ggplot(tsne.data, aes(factor(dbCluster), values, fill = factor(dbCluster))) +
