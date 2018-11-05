@@ -188,16 +188,8 @@ shinyServer(function(input, output) {
       paste(input$cluster, "Selected_Expression_table.csv", sep = '_')
     },
     content = function(file) {
-      geneid <- rownames(dataTables$featuredata[which(dataTables$featuredata$Associated.Gene.Name ==
-                                                        toupper(input$gene_id)), ])[1]
+      callModule(subsetdata, dataTables = dataTables, tsne = FALSE)
 
-      expression <- dataTables$log2cpm[geneid, ]
-      tsne.data <- cbind(dataTables$tsne.data, t(expression))
-
-      names(tsne.data)[names(tsne.data) == geneid] <- 'values'
-
-
-      subsetData <- subset(tsne.data, dbCluster == input$cluster)
       cells.names <- brushedPoints(subsetData, input$b1, allRows = T)
       cells <-
         rownames(subsetData[which(cells.names$selected_ == TRUE), ])
