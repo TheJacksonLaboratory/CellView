@@ -1,6 +1,5 @@
 # LIBRARY -----------------------------------------------------------------
 
-
 init_server <- function() {
   set.seed(1)
   options(shiny.maxRequestSize = 2000 * 1024 ^ 2)
@@ -72,6 +71,7 @@ shinyServer(function(input, output) {
              choices = (c("All"), c(0:noOfClusters)))
   
   # MAIN 3D PLOT ------------------------------------------------------------------
+
   output$tsne_main <- renderPlotly({
     inFile <- input$file1
 
@@ -137,6 +137,7 @@ shinyServer(function(input, output) {
     })
   })
   # EXPLORE TAB CLUSTER PLOT ------------------------------------------------------------------
+
   output$clusterPlot <- renderPlot({
     if (v$doPlot == FALSE)
       return()
@@ -158,6 +159,7 @@ shinyServer(function(input, output) {
     })
   })
   # EXPLORE TAB VIOLIN PLOT ------------------------------------------------------------------
+
   output$gene_vio_plot <- renderPlot({
     if (v$doPlot == FALSE)
       return()
@@ -183,6 +185,7 @@ shinyServer(function(input, output) {
     })
   })
   # EXPLORE TABL DOWNLOAD SELECTED WITH BRUSH ------------------------------------------------------------------
+
   output$downloadExpression <- downloadHandler(
     filename = function() {
       paste(input$cluster, "Selected_Expression_table.csv", sep = '_')
@@ -278,54 +281,6 @@ shinyServer(function(input, output) {
     vv$doPlot <- input$goButton1
   })
 
-  # output$heatmap<-renderPlotly({
-  #
-  #   if (vv$doPlot == FALSE) return()
-  #
-  #   isolate({
-  #
-  #     genesin<-input$heatmap_geneids
-  #     genesin<-toupper(genesin)
-  #     genesin<-strsplit(genesin,',')
-  #
-  #     map<-rownames(dataTables$featuredata[
-  #       which(dataTables$featuredata$Associated.Gene.Name %in% genesin[[1]]),])
-  #     cat(file=stderr(),map[1])
-  #
-  #     #geneid<-rownames(
-  #      # dataTables$featuredata[which(dataTables$featuredata$Associated.Gene.Name==toupper(input$gene_id)),])[1]
-  #
-  #     expression<-dataTables$log2cpm[map,]
-  #
-  #     validate(
-  #       need(is.na(sum(expression))!=TRUE,'Gene symbol incorrect or genes not expressed')
-  #     )
-  #
-  #     tsne.data<-dataTables$tsne.data
-  #     #names(tsne.data)[names(tsne.data) == geneid] <- 'values'
-  #
-  #     #p <- plot_ly(tsne.data, x = ~V1, y = ~V2, z = ~V3, type = "scatter3d",
-  #     #             hoverinfo = "text",
-  #     #             text=paste('Cluster:',tsne.data$dbCluster),
-  #     #             mode = 'markers',marker=list(size=2,line=list(width=0),
-  #     #                                          color=~values,colors='Greens')
-  #
-  #     #expression<-rbind(expression,t(tsne.data$dbCluster))
-  #
-  #     p<-plot_ly()%>%
-  #       add_trace(z=as.matrix(expression),
-  #                y=dataTables$featuredata[rownames(expression),'Associated.Gene.Name'],
-  #                hoverinfo='text',
-  #                text=paste(rownames(expression),colnames(expression)),
-  #                type='heatmap',
-  #                zmax=5,
-  #                zmin=-5,
-  #                colorscale='RdBu',
-  #                xtype='scaled'
-  #                )%>%
-  #     layout(p)
-  #   })
-  # })
 
   output$heatmap <- renderPlot({
     if (vv$doPlot == FALSE)
@@ -357,30 +312,9 @@ shinyServer(function(input, output) {
       colnames(annotation) <- c('Cluster')
         
       callModule(heat_map, data = expression, cluster_cols = FALSE, annotation_col = annotation)
-     
-      # h3<-heatmap.3(as.matrix(expression),
-      #               Colv = F,
-      #               Rowv=F,
-      #               na.color = "gray95",
-      #               #dendrogram = "row",
-      #               col = colorRampPalette(rev(brewer.pal(n = 6, name =
-      #                                                       "RdBu")))(100),
-      #               #trace = "row",
-      #               tracecol = NULL,
-      #               linecol = "gray80",
-      #               KeyValueName = "Z-score",
-      #               ColSideColors = as.matrix(annotation$Cluster),
-      #               lhei = c(2,5),
-      #               lwid = c(2,5),
-      #               side.height.fraction = 0.5
-      #               #labRow = dataTables$featuredata[rownames(expression),'Associated.Gene.Name']
-      #
-      #               )
-      # h3
-    })
-  })
 
   # CO EXPRESSION TAB CLUSTER PLOT ------------------------------------------------------------------
+
   vvvvv <- reactiveValues(doPlot = FALSE)
   observeEvent(input$goButton5, {
     vvvvv$doPlot <- input$goButton5
@@ -407,6 +341,7 @@ shinyServer(function(input, output) {
       p1
     })
   })
+
   # CO EXPRESSION TAB SELECTED HEATMAP ------------------------------------------------------------------
   vvvvvv <- reactiveValues(doPlot = FALSE)
   observeEvent(input$goButton6, {
@@ -425,7 +360,6 @@ shinyServer(function(input, output) {
       subsetData <-
         subset(dataTables$tsne.data, dbCluster == input$clusters2)
       cells.1 <- rownames(brushedPoints(subsetData, input$scb1))
-
 
       map <- rownames(dataTables$featuredata[which(dataTables$featuredata$Associated.Gene.Name %in% genesin[[1]]), ])
 
@@ -446,6 +380,7 @@ shinyServer(function(input, output) {
   })
 
   # CO EXPRESSION TAB ON/OFF PLOT ------------------------------------------------------------------
+
   vvvvvvv <- reactiveValues(doPlot = FALSE)
   observeEvent(input$goButton7, {
     vvvvvvv$doPlot <- input$goButton7
@@ -463,7 +398,6 @@ shinyServer(function(input, output) {
       subsetData <-
         subset(dataTables$tsne.data, dbCluster == input$clusters3)
       cells.1 <- rownames(subsetData)
-
 
       map <- rownames(dataTables$featuredata[which(dataTables$featuredata$Associated.Gene.Name %in% genesin[[1]]), ])
 
@@ -507,8 +441,8 @@ shinyServer(function(input, output) {
     })
   })
 
-
   # ONOFF TAB DOWNLOAD POSITIVECELLS ------------------------------------------------------------------
+
   output$downloadExpressionOnOff <- downloadHandler(
     filename = function() {
       paste(input$clusters3, "PositiveCells.csv", sep = '_')
@@ -535,6 +469,7 @@ shinyServer(function(input, output) {
   )
 
   # ONOFF TAB RENDER TABLE ALL CELLS ------------------------------------------------------------------
+
   output$onOffTable <- DT::renderDataTable({
     if (vvvvvvv$doPlot == FALSE)
       return()
@@ -553,8 +488,8 @@ shinyServer(function(input, output) {
     })
   })
 
-
   # SUBCLUSTER DGE PLOT1 ------------------------------------------------------------------
+
   vvv <- reactiveValues(doPlot = FALSE)
   observeEvent(input$goButton2, {
     vvv$doPlot <- input$goButton2
@@ -572,6 +507,7 @@ shinyServer(function(input, output) {
       callModule(tsne_2d_plot, data = subsetData)     
     })
   })
+
   # SUBCLUSTER DGE PLOT2 ------------------------------------------------------------------
 
   output$dge_plot2 <- renderPlot({
@@ -586,13 +522,13 @@ shinyServer(function(input, output) {
       callModule(tsne_2d_plot, data = subsetData)
     })
   })
+
   # SUBCLUSTER DGE ANALYSIS ------------------------------------------------------------------
 
   vvvv <- reactiveValues(doPlot = FALSE)
   observeEvent(input$goButton3, {
     vvvv$doPlot <- input$goButton3
   })
-
 
   dge <- reactive({
     if (vvvv$doPlot == FALSE)
@@ -628,6 +564,7 @@ shinyServer(function(input, output) {
 
     })
   })
+
   # SUBCLUSTER DGE OUTPUT TABLE ------------------------------------------------------------------
 
   output$dge <- DT::renderDataTable({
@@ -650,6 +587,7 @@ shinyServer(function(input, output) {
   })
 
   # SUBCLUSTER DGE DOWNLOADS ------------------------------------------------------------------
+
   output$download_dge_table <- downloadHandler(
     filename = function() {
       paste("SubCluster", "DGE_table.csv", sep = '_')
